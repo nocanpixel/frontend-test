@@ -3,18 +3,22 @@ import "leaflet/dist/leaflet.css";
 import { useGeolocation } from '../../hooks/useGeolocation';
 import Loading from '../Loading';
 import { usePokemonStore } from '../../store/store';
-import { useEffect } from 'react';
+import markerIconPng from "leaflet/dist/images/marker-icon.png"
+import {Icon} from 'leaflet'
+
+
+const icon = new Icon({
+  iconUrl: markerIconPng,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+});
 
 const Map = () => {
   const {currentLocation} = useGeolocation();
   const pokemons = usePokemonStore((state) => state.data);
 
-  useEffect(()=>{
-    console.log(pokemons)
-  },[pokemons])
-
   if (!currentLocation) {
-    return <div className='w-full dark:bg-slate-900 h-screen flex justify-center items-center'>
+    return <div className='w-full dark:bg-slate-800 h-screen flex justify-center items-center'>
       <Loading/>
     </div>;
   }
@@ -29,7 +33,7 @@ const Map = () => {
   {pokemons && (
     pokemons.map((pokemon, index) => (
       pokemon.location?.latitude !== undefined && pokemon.location?.longitude !== undefined && (
-        <Marker position={[pokemon.location.latitude, pokemon.location.longitude]} key={index}>
+        <Marker icon={icon} position={[pokemon.location.latitude, pokemon.location.longitude]} key={index}>
           <Popup>
             {pokemon.name}
           </Popup>

@@ -1,10 +1,9 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { withAuthentication } from "../helpers/withAuthentication";
 import { Cookie } from "../utils/tools";
 import { useNavigate } from "react-router-dom";
 import { DraggableMenu } from "../components/menu/DraggableMenu";
 import { useFetchPokemons } from "../hooks/useFetchPokemons";
-import { usePokemonStore } from "../store/store";
 import { SideMenu } from "../components/menu/SideMenu";
 import Map from "../components/map/Map";
 import './styles.css';
@@ -15,7 +14,7 @@ export const Home = withAuthentication(({user}) => {
   const navigate = useNavigate();
   const parentRef = useRef<HTMLDivElement>(null);
 
-  const {pokemons,next,prev, loading, locationsLoading} = useFetchPokemons();
+  const {next,prev, loading, locationsLoading} = useFetchPokemons();
 
   const handleLogout = () => {
     cookie.removeUser();

@@ -71,8 +71,12 @@ export const useFetchPokemons = () => {
   }, [page.results]);
 
   const getRandomLocationsBatch = async (latitude: number, longitude: number, count: number): Promise<Location[]> => {
-    const randomLocationPromises = Array.from({ length: count }, () => getRandomLocationDetails(latitude, longitude));
-    return Promise.all(randomLocationPromises);
+    const batch = [];
+    for (let i = 0; i < count; i++) {
+      const randomLocation = await getRandomLocationDetails(latitude, longitude);
+      batch.push(randomLocation);
+    }
+    return batch;
   };
   
   const next = useCallback(async () => {
