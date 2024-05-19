@@ -11,6 +11,18 @@ El candidato debe desarrollar una interfaz que cumpla con los siguientes requisi
 * Posicionar información geolocalmente.
 
 ---
+## Despliegue
+Desplegado en Vercel link a preview [Demo](https://test.cambe.app/)
+
+## Autenticación
+
+```plaintext
+src/utils/users
+
+    user:admin@gmail.com
+    password:admin
+    
+```
 
 ## Cómo Iniciar el Proyecto
 
@@ -58,7 +70,7 @@ VITE_POSITION=pos
 
 ### Extra: Modo Oscuro y Modo Claro
 
-El proyecto incluye soporte para modo oscuro y modo claro, los cuales se ajustan automáticamente según la apariencia del sistema operativo del usuario. Esta funcionalidad mejora la experiencia del usuario al proporcionar una interfaz visualmente cómoda y adaptable a las preferencias de cada individuo.
+El proyecto incluye modo oscuro y modo claro, los cuales se ajustan automáticamente según la apariencia del sistema operativo del usuario.
 
 #### Modo Oscuro
 
@@ -71,5 +83,3 @@ En el modo oscuro, la interfaz del usuario adopta una paleta de colores oscuros 
 En el modo claro, la interfaz del usuario utiliza colores claros que son ideales para entornos bien iluminados, proporcionando una mejor visibilidad y claridad en condiciones de alta luminosidad.
 
 ![Imagen del modo claro](https://i.ibb.co/S6zp3Fh/Screenshot-2024-05-19-at-7-21-24-PM.png)
-
-Este ajuste automático entre modo oscuro y modo claro se basa en las configuraciones del sistema del usuario, lo que permite una experiencia personalizada y coherente sin necesidad de intervención manual.
