@@ -14,7 +14,7 @@ const Login: React.FC = () => {
   },[])
 
   return (
-    <section className="px-2 h-screen flex justify-center items-center">
+    <section className="px-2 h-dvh flex justify-center items-center">
       <div className="container relative py-8 px-4 flex flex-col shadow-lg border border-slate-200 dark:border-none dark:bg-slate-800 rounded-3xl min-h-[35em] md:w-[34em]">
         <div className="flex-grow flex flex-col justify-center gap-10">
         <div className="flex flex-col gap-1">

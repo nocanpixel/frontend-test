@@ -25,7 +25,7 @@ export const Home = withAuthentication(({user}) => {
   return (
     <section
       ref={parentRef}
-      className="parent-container relative h-screen w-full overflow-hidden "
+      className="parent-container relative h-dvh w-full overflow-hidden "
     >
       <DraggableMenu user={user} locationsLoading={locationsLoading} prev={prev} loading={loading} next={next} logout={handleLogout} className={`md:hidden`} parentRef={parentRef} />
       <div className="flex">

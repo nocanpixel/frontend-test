@@ -71,7 +71,7 @@ export const DraggableMenu: React.FC<MenuProps> = ({
     >
       <div
         ref={draggableRef}
-        className={`w-full absolute z-[500] px-4 border bg-slate-50 border-slate-200 dark:border-none shadow-[0_15px_60px_-15px_rgba(0,0,0,0.3)] dark:bg-slate-800 h-screen rounded-t-3xl ${className} `}
+        className={`w-full absolute z-[500] px-4 border bg-slate-50 border-slate-200 dark:border-none shadow-[0_15px_60px_-15px_rgba(0,0,0,0.3)] dark:bg-slate-800 h-dvh rounded-t-3xl ${className} `}
       >
         <div className="draggable cursor-grab w-full flex justify-center h-10">
           <span className="bg-slate-200 dark:bg-slate-400 px-10 py-1 absolute top-2 rounded-full"></span>

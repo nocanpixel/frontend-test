@@ -17,7 +17,7 @@ export const SideMenu: React.FC<MenuProps> = ({
   const pokemons = usePokemonStore((state) => state.data);
   return (
     <section
-      className={`h-screen dark:bg-slate-900 px-4 py-8 ${className}`}
+      className={`h-dvh dark:bg-slate-900 px-4 py-8 ${className}`}
     >
       <div className="flex flex-col gap-4 md:w-[20em] lg:w-[25em]">
         <div className="flex justify-between rounded-lg items-center bg-slate-50 dark:bg-slate-800 p-6">
