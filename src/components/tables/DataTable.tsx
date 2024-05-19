@@ -25,7 +25,7 @@ const renderData = (data: PokemonData[]) => {
 
 export const DataTable: React.FC<Props> = ({ data }) => {
   return (
-    <div className="relative overflow-x-auto rounded-lg max-h-[30em] ">
+    <div className="relative overflow-x-auto rounded-lg max-h-[27em] ">
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
