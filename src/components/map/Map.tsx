@@ -10,7 +10,7 @@ import {Icon} from 'leaflet'
 const icon = new Icon({
   iconUrl: markerIconPng,
   iconSize: [25, 41],
-  iconAnchor: [12, 41],
+  iconAnchor: [12, 0],
 });
 
 const Map = () => {
