@@ -24,7 +24,7 @@ export class Cookie {
         return cookies.remove(_SESSION);
     }
     setPosition(val:Position){
-        return cookies.set(_POSITION, val, {secure:false,path:'/'})
+        return cookies.set(_POSITION, val, {secure:false,path:'/',maxAge:60})
     }
     position(){
         return cookies.get(_POSITION);
