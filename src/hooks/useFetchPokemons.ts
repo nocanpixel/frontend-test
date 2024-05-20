@@ -126,7 +126,7 @@ export const useFetchPokemons = () => {
     } else {
       fetchPokemons();
     }
-  }, [next,prev]);
+  }, []);
 
 
   return { pokemons, next, prev, page, loading, locationsLoading, pokemonsFound };
