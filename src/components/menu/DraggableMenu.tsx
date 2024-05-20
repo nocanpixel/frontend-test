@@ -51,11 +51,9 @@ export const DraggableMenu: React.FC<MenuProps> = ({
   };
 
   useEffect(() => {
-    const parent = parentRef?.current;
-    const draggable = draggableRef.current;
-    if (parent && draggable) {
-      setParentRect(parent.getBoundingClientRect());
-      setDraggableRect(draggable.getBoundingClientRect());
+    if (parentRef?.current && draggableRef.current) {
+      setParentRect(parentRef.current.getBoundingClientRect());
+      setDraggableRect(draggableRef.current.getBoundingClientRect());
     }
   }, [parentRef]);
 
@@ -74,7 +72,7 @@ export const DraggableMenu: React.FC<MenuProps> = ({
         className={`w-full absolute z-[500] px-4 border bg-slate-50 border-slate-200 dark:border-none shadow-[0_15px_60px_-15px_rgba(0,0,0,0.3)] dark:bg-slate-800 h-dvh rounded-t-3xl ${className} `}
       >
         <div className="draggable cursor-grab w-full flex justify-center h-10">
-          <span className="bg-slate-200 dark:bg-slate-400 px-10 py-1 absolute top-2 rounded-full"></span>
+          <span className="bg-slate-200 dark:bg-slate-500 px-6 py-[2.4px] absolute top-2 rounded-full"></span>
         </div>
         <section className="w-full h-5/6 flex flex-col gap-4 py-4">
           <div className="flex justify-between items-center">

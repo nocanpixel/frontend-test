@@ -52,6 +52,7 @@ export const useFetchPokemons = () => {
       );
 
       const cLocation = await getCurrentLocation();
+
       const randomLocations = await getRandomLocationsBatch(cLocation.latitude, cLocation.longitude, results.length);
       setLocationsLoading(false);
       
