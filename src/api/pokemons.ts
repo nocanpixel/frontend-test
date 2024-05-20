@@ -13,12 +13,6 @@ const pokeApi = {
     getPokemonsDetails: (url:string) => {
         return axiosInstance.get(url);
     },
-    getPokemonsLocation: (url:string) => {
-        return axiosInstance.get(url);
-    },
-    getLocationName: (url:string) => {
-        return axiosInstance.get(url);
-    }
 }
 
 export default pokeApi;

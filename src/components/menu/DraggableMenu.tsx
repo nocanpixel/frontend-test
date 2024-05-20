@@ -7,7 +7,6 @@ import { MenuProps } from "../../types/interfaces";
 import { ArrowLeftEndOnRectangleIcon } from "@heroicons/react/24/outline";
 import Loading from "../Loading";
 
-
 const cookie = new Cookie();
 export const DraggableMenu: React.FC<MenuProps> = ({
   parentRef,
@@ -17,7 +16,8 @@ export const DraggableMenu: React.FC<MenuProps> = ({
   prev,
   logout,
   loading,
-  locationsLoading
+  locationsLoading,
+  pokemonsFound,
 }) => {
   const [position, setPosition] = useState<{ x: number; y: number }>(
     cookie.position() || {
@@ -91,17 +91,30 @@ export const DraggableMenu: React.FC<MenuProps> = ({
             </button>
           </div>
           <div className="flex-grow flex flex-col">
-          {!loading&&!locationsLoading ? <DataTable data={pokemons} /> : (
-            <div className="flex justify-center items-center flex-grow">
-              <Loading/>
-            </div>
-          )}
+            {!loading && !locationsLoading ? (
+              <DataTable data={pokemons} />
+            ) : (
+              <div className="flex justify-center items-center flex-grow">
+                <div className="flex flex-col items-center gap-4">
+                  <Loading />
+                  <div className="flex flex-col items-center">
+                    <span>Looking for pokemons...</span>
+                    <span className="text-slate-400 text-sm">
+                      Pokemons found{" "}
+                      <span className=" font-bold dark:text-white text-black">
+                        {pokemonsFound}
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
           <div className="flex w-full justify-between">
-            <button disabled={loading && true} onClick={() => prev()}>
+            <button className={`${(loading||locationsLoading)?'opacity-60':''}`} disabled={(loading||locationsLoading) && true} onClick={() => prev()}>
               prev
             </button>
-            <button disabled={loading && true} onClick={() => next()}>
+            <button className={`${(loading||locationsLoading)?'opacity-60':''}`} disabled={(loading||locationsLoading) && true} onClick={() => next()}>
               next
             </button>
           </div>

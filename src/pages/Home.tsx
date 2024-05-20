@@ -14,7 +14,7 @@ export const Home = withAuthentication(({user}) => {
   const navigate = useNavigate();
   const parentRef = useRef<HTMLDivElement>(null);
 
-  const {next,prev, loading, locationsLoading} = useFetchPokemons();
+  const { next,prev, loading, locationsLoading, pokemonsFound} = useFetchPokemons();
 
   const handleLogout = () => {
     cookie.removeUser();
@@ -27,9 +27,9 @@ export const Home = withAuthentication(({user}) => {
       ref={parentRef}
       className="parent-container relative h-dvh w-full overflow-hidden "
     >
-      <DraggableMenu user={user} locationsLoading={locationsLoading} prev={prev} loading={loading} next={next} logout={handleLogout} className={`md:hidden`} parentRef={parentRef} />
+      <DraggableMenu pokemonsFound={pokemonsFound} user={user} locationsLoading={locationsLoading} prev={prev} loading={loading} next={next} logout={handleLogout} className={`md:hidden`} parentRef={parentRef} />
       <div className="flex">
-      <SideMenu user={user} locationsLoading={locationsLoading} prev={prev} loading={loading} next={next} logout={handleLogout} className={`hidden md:flex`} />
+      <SideMenu pokemonsFound={pokemonsFound} user={user} locationsLoading={locationsLoading} prev={prev} loading={loading} next={next} logout={handleLogout} className={`hidden md:flex`} />
       <div className="leaflet-container">
       <Map/>
       </div>

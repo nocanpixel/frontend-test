@@ -12,13 +12,12 @@ export const SideMenu: React.FC<MenuProps> = ({
   loading,
   next,
   prev,
-  locationsLoading
+  locationsLoading,
+  pokemonsFound,
 }) => {
   const pokemons = usePokemonStore((state) => state.data);
   return (
-    <section
-      className={`h-dvh dark:bg-slate-900 px-4 py-8 ${className}`}
-    >
+    <section className={`h-dvh dark:bg-slate-900 px-4 py-8 ${className}`}>
       <div className="flex flex-col gap-4 md:w-[20em] lg:w-[25em]">
         <div className="flex justify-between rounded-lg items-center bg-slate-50 dark:bg-slate-800 p-6">
           <div className="flex flex-col">
@@ -34,17 +33,25 @@ export const SideMenu: React.FC<MenuProps> = ({
           </button>
         </div>
         <div className="flex-grow flex flex-col justify-center">
-          {!loading&&!locationsLoading ? <DataTable data={pokemons} /> : (
+          {!loading && !locationsLoading ? (
+            <DataTable data={pokemons} />
+          ) : (
             <div className="flex justify-center">
-              <Loading/>
+              <div className="flex flex-col items-center gap-4">
+                <Loading />
+                <div className="flex flex-col items-center">
+                  <span>Looking for pokemons...</span>
+                  <span className="text-slate-400 text-sm">Pokemons found <span className=" font-bold dark:text-white text-black">{pokemonsFound}</span></span>
+                </div>
+              </div>
             </div>
           )}
         </div>
         <div className="flex w-full py-3 px-6 rounded-lg justify-between bg-slate-50 dark:bg-slate-800">
-          <button disabled={loading && true} onClick={() => prev()}>
+          <button className={`${locationsLoading||loading?'opacity-60':''}`}  disabled={(locationsLoading||loading) && true} onClick={() => prev()}>
             prev
           </button>
-          <button disabled={loading && true} onClick={() => next()}>
+          <button className={`${locationsLoading||loading?'opacity-60':''}`}  disabled={(locationsLoading||loading)&& true} onClick={() => next()}>
             next
           </button>
         </div>

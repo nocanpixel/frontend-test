@@ -35,4 +35,5 @@ export interface MenuProps {
   logout: () => void;
   loading: boolean;
   locationsLoading: boolean;
+  pokemonsFound: number;
 }

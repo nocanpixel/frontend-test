@@ -27,6 +27,7 @@ export const useFetchPokemons = () => {
   const {getRandomLocationDetails, getCurrentLocation} = useGeolocation();
   const [locationsLoading, setLocationsLoading] = useState<boolean>(false);
   const setGlobalState = usePokemonStore((state)=> state.setData);
+  const [pokemonsFound, setPokemonsFound] = useState<number>(0);
 
   const fetchPokemons = useCallback(async () => {
     try {
@@ -53,16 +54,18 @@ export const useFetchPokemons = () => {
       const cLocation = await getCurrentLocation();
       const randomLocations = await getRandomLocationsBatch(cLocation.latitude, cLocation.longitude, results.length);
       setLocationsLoading(false);
-
+      
       const dataPromises = pokemonData.map(async (pokemon: {id:number,name:string}, index: number) => ({
         id: pokemon.id,
         name: pokemon.name,
         location: randomLocations[index],
       }));
-    
+      
+      
       const resolvedData = await Promise.all(dataPromises);
       setPokemons(resolvedData);
       setGlobalState(resolvedData);
+      setPokemonsFound(0);
       localStorage.setItem("pokemons", JSON.stringify(resolvedData));
       
     } catch (error) {
@@ -74,6 +77,7 @@ export const useFetchPokemons = () => {
     const batch = [];
     for (let i = 0; i < count; i++) {
       const randomLocation = await getRandomLocationDetails(latitude, longitude);
+      setPokemonsFound(i+1);
       batch.push(randomLocation);
     }
     return batch;
@@ -125,5 +129,5 @@ export const useFetchPokemons = () => {
   }, [next,prev]);
 
 
-  return { pokemons, next, prev, page, loading, locationsLoading };
+  return { pokemons, next, prev, page, loading, locationsLoading, pokemonsFound };
 };
