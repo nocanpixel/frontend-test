@@ -76,7 +76,6 @@ export const useFetchPokemons = () => {
       const resolvedData = await Promise.all(dataPromises);
       setPokemons(resolvedData);
       setGlobalState(resolvedData);
-      console.log(randomLocations)
       setPokemonsFound(0);
       localStorage.setItem("pokemons", JSON.stringify(resolvedData));
       

@@ -26,7 +26,8 @@ export const SideMenu: React.FC<MenuProps> = ({
           </div>
           <button
             onClick={() => logout()}
-            className="flex gap-2 cursor-pointer hover:opacity-65"
+            disabled={(loading||locationsLoading) && true}
+            className={`${(loading||locationsLoading)?'flex gap-2 opacity-65':'flex gap-2 hover:opacity-80'}`}
           >
             <span>{"Logout"}</span>
             <ArrowLeftEndOnRectangleIcon className="w-6" />
