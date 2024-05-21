@@ -46,9 +46,14 @@ export const useGeolocation = () => {
   };
 
   const getPlaceName = async (latitude: number, longitude: number): Promise<string> => {
-    const response = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`);
-    const data = await response.json();
-    return data.address.road;
+    let data;
+    try{
+      const response = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`);
+      data = await response.json();
+    }catch(_){
+      return 'Unknow area'
+    }
+    return data.address.road||'Unknow area';
   };
 
   const getRandomOffset = (): number => {

@@ -40,6 +40,16 @@ export const useFetchPokemons = () => {
     }
   }, []);
 
+  const getRandomLocationsBatch = async (latitude: number, longitude: number, count: number): Promise<Location[]> => {
+    const batch = [];
+    for (let i = 0; i < count; i++) {
+      const randomLocation = await getRandomLocationDetails(latitude, longitude);
+      setPokemonsFound(i+1);
+      batch.push(randomLocation);
+    }
+    return batch;
+  };
+  
 
   const fetchPokemonDetails = useCallback(async (results: Results[]) => {
     try {
@@ -66,24 +76,15 @@ export const useFetchPokemons = () => {
       const resolvedData = await Promise.all(dataPromises);
       setPokemons(resolvedData);
       setGlobalState(resolvedData);
+      console.log(randomLocations)
       setPokemonsFound(0);
       localStorage.setItem("pokemons", JSON.stringify(resolvedData));
       
     } catch (error) {
       console.error("Error fetching pokemon details:", error);
     }
-  }, [page.results]);
+  }, [page.results,getRandomLocationsBatch]);
 
-  const getRandomLocationsBatch = async (latitude: number, longitude: number, count: number): Promise<Location[]> => {
-    const batch = [];
-    for (let i = 0; i < count; i++) {
-      const randomLocation = await getRandomLocationDetails(latitude, longitude);
-      setPokemonsFound(i+1);
-      batch.push(randomLocation);
-    }
-    return batch;
-  };
-  
   const next = useCallback(async () => {
     if (!page.next) return;
     setLoading(true);
@@ -97,7 +98,7 @@ export const useFetchPokemons = () => {
     } finally {
       setLoading(false);
     }
-  }, [page.next]);
+  }, [page.next,getRandomLocationsBatch]);
   
   const prev = useCallback(async () => {
     if (!page.previous) return;
@@ -112,7 +113,7 @@ export const useFetchPokemons = () => {
     } finally {
       setLoading(false);
     }
-  }, [page.previous]);
+  }, [page.previous,getRandomLocationsBatch]);
 
   
   useEffect(() => {
