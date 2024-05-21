@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 
-export const NotFound404 = () => {
+const NotFound404 = () => {
   const navigate = useNavigate();
   return (
     <section className='flex justify-center items-center h-dvh'>
@@ -18,3 +18,5 @@ export const NotFound404 = () => {
     </section>
   )
 }
+
+export default NotFound404;

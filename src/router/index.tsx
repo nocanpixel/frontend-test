@@ -1,7 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
-import Login from "../pages/Login";
-import {Home} from "../pages/Home";
-import { NotFound404 } from "../pages/404";
+import { lazy } from "react";
+const Home = lazy(()=> import('../pages/Home'));
+const NotFound404 = lazy(()=> import('../pages/404'));
+const Login = lazy(()=> import('../pages/Login'));
 
 
 const router = createBrowserRouter([

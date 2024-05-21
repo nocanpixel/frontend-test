@@ -10,7 +10,7 @@ import './styles.css';
 
 const cookie = new Cookie();
 
-export const Home = withAuthentication(({user}) => {
+const Home = withAuthentication(({user}) => {
   const navigate = useNavigate();
   const parentRef = useRef<HTMLDivElement>(null);
 
@@ -37,3 +37,5 @@ export const Home = withAuthentication(({user}) => {
     </section>
   );
 });
+
+export default Home;
