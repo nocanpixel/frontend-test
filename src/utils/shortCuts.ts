@@ -10,7 +10,7 @@ const cookie = new Cookie();
 export const mockingUser = async (data:Auth) => {
     await new Promise(resolve => setTimeout(resolve, 1000));
     const user = users.find(element => element.email === data.email && element.password === data.password);
-
+    console.log(user,data)
     if(!user)throw new Error("User or password are incorrect.");
 
     cookie.setAuth(1);

@@ -18,9 +18,9 @@ const LoginForm: React.FC = () => {
   });
 
   const handleOnChange = (e:React.ChangeEvent<HTMLInputElement>) => {
-    if(loginState===LoginState.Error)return setLoginState(LoginState.Idle);
+    if(loginState===LoginState.Error) setLoginState(LoginState.Idle);
     const { name, value } = e.target;
-    setFormData(prev=> ({...prev,[name]:value}) )
+    setFormData(prev=> ({...prev,[name]:value}))
   }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -34,6 +34,7 @@ const LoginForm: React.FC = () => {
         }
         navigate('/')
       } catch (_) {
+        setFormData({...formData,password:''});
         setLoginState(LoginState.Error)
       }
   }
@@ -48,6 +49,7 @@ const LoginForm: React.FC = () => {
         <input
           ref={index === 0 ? inputRef : undefined}
           required
+          value={ele.type==='password'?formData.password:formData.email}
           onChange={handleOnChange}
           name={ele.name}
           placeholder={ele.name}

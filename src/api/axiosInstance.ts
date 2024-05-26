@@ -20,6 +20,7 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   (error) => {
+    cookie.removeUser();
     return Promise.reject(error);
   }
 );
