@@ -6,6 +6,7 @@ import { usePokemonStore } from "../../store/store";
 import { MenuProps } from "../../types/interfaces";
 import { ArrowLeftEndOnRectangleIcon } from "@heroicons/react/24/outline";
 import Loading from "../Loading";
+import { useGeolocation } from "../../hooks/useGeolocation";
 
 const cookie = new Cookie();
 export const DraggableMenu: React.FC<MenuProps> = ({
@@ -29,6 +30,7 @@ export const DraggableMenu: React.FC<MenuProps> = ({
   const [draggableRect, setDraggableRect] = useState<DOMRect | null>(null);
   const draggableRef = useRef<HTMLDivElement>(null);
   const pokemons = usePokemonStore((state) => state.data);
+  const { error } = useGeolocation();
 
   const bounds = useMemo(() => {
     if (!parentRect || !draggableRect) {
@@ -57,6 +59,38 @@ export const DraggableMenu: React.FC<MenuProps> = ({
     }
   }, [parentRef]);
 
+
+  const isDisabled = loading || locationsLoading;
+  const loadingOrError = error ? (
+    <div className="flex-grow flex flex-col justify-center items-center">
+      <span>The geolocation service was cancelled.</span>
+      <span className="text-slate-400 text-sm">
+        {"Please reload the page and try again."}
+      </span>
+    </div>
+  ) : (
+    <div className="flex-grow flex flex-col justify-center">
+      {!loading && !locationsLoading ? (
+        <DataTable data={pokemons} />
+      ) : (
+        <div className="flex justify-center">
+          <div className="flex flex-col items-center gap-4">
+            <Loading />
+            <div className="flex flex-col items-center">
+              <span>Looking for pokemons...</span>
+              <span className="text-slate-400 text-sm">
+                Pokemons found{" "}
+                <span className="font-bold dark:text-white text-black">
+                  {pokemonsFound}
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+
   return (
     <Draggable
       axis="y"
@@ -82,38 +116,21 @@ export const DraggableMenu: React.FC<MenuProps> = ({
             </div>
             <button
               onClick={() => logout()}
-              disabled={(loading||locationsLoading) && true}
-              className={`${(loading||locationsLoading)?'flex gap-2 opacity-65':'flex gap-2 hover:opacity-80'}`}
+              disabled={(isDisabled&&!error) && true}
+              className={`${(isDisabled&&!error)?'flex gap-2 opacity-65':'flex gap-2 hover:opacity-80'}`}
             >
               <span>{"Logout"}</span>
               <ArrowLeftEndOnRectangleIcon className="w-6" />
             </button>
           </div>
           <div className="flex-grow flex flex-col">
-            {!loading && !locationsLoading ? (
-              <DataTable data={pokemons} />
-            ) : (
-              <div className="flex justify-center items-center flex-grow">
-                <div className="flex flex-col items-center gap-4">
-                  <Loading />
-                  <div className="flex flex-col items-center">
-                    <span>Looking for pokemons...</span>
-                    <span className="text-slate-400 text-sm">
-                      Pokemons found{" "}
-                      <span className=" font-bold dark:text-white text-black">
-                        {pokemonsFound}
-                      </span>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            )}
+            {loadingOrError}
           </div>
           <div className="flex w-full justify-between">
-            <button className={`${(loading||locationsLoading)?'opacity-60':''}`} disabled={(loading||locationsLoading) && true} onClick={() => prev()}>
+            <button className={`${(isDisabled)?'opacity-60':''}`} disabled={(isDisabled) && true} onClick={() => prev()}>
               prev
             </button>
-            <button className={`${(loading||locationsLoading)?'opacity-60':''}`} disabled={(loading||locationsLoading) && true} onClick={() => next()}>
+            <button className={`${(isDisabled)?'opacity-60':''}`} disabled={(isDisabled) && true} onClick={() => next()}>
               next
             </button>
           </div>

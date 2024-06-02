@@ -12,6 +12,7 @@ export const useGeolocation = () => {
   const [currentLocation, setCurrentLocation] = useState<LocationDetails | null>(
     null
   );
+  const [error, setError] = useState<boolean | null>(null);
 
 
   useEffect(() => {
@@ -20,6 +21,7 @@ export const useGeolocation = () => {
         const location = await getCurrentLocation();
         setCurrentLocation(location);
       } catch (_) {
+        setError(true);
         console.error("Geolocation error :", _);
       }
     })();
@@ -75,6 +77,7 @@ export const useGeolocation = () => {
   return {
     currentLocation,
     getRandomLocationDetails,
-    getCurrentLocation
+    getCurrentLocation,
+    error
   }
 };

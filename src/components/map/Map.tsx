@@ -14,8 +14,14 @@ const icon = new Icon({
 });
 
 const Map = () => {
-  const {currentLocation} = useGeolocation();
+  const {currentLocation,error} = useGeolocation();
   const pokemons = usePokemonStore((state) => state.data);
+
+  if (error) {
+    return <div className='w-full dark:bg-slate-800 h-screen flex justify-center items-center'>
+      Error
+    </div>;
+  }
 
   if (!currentLocation) {
     return <div className='w-full dark:bg-slate-800 h-screen flex justify-center items-center'>
